@@ -11,6 +11,7 @@ import { Pager } from '@/ui/Pager';
 import { Toc } from '@/ui/Toc';
 import { getTableOfContents } from '@/utils/toc.util';
 import { Component, allComponents } from 'contentlayer/generated';
+import { TrackView } from '@heimdall-logs/tracker/react';
 
 type ComponentProps = {
 	params: {
@@ -65,6 +66,12 @@ const ComponentLayout = async ({ params }: ComponentProps) => {
 	const toc = await getTableOfContents(component.body.raw);
 
 	return (
+		<TrackView
+			name={slug}
+			payload={{
+				foo: 'bar',
+			}}
+		>
 		<div className='flex space-x-10 p-4 2xl:px-10 2xl:py-8'>
 			<article className='w-full 2xl:w-5/6'>
 				<div className='mb-8 space-y-4'>
@@ -94,6 +101,7 @@ const ComponentLayout = async ({ params }: ComponentProps) => {
 				<Toc toc={toc} />
 			</div>
 		</div>
+		</TrackView>
 	);
 };
 
