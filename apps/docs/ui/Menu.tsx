@@ -127,6 +127,10 @@ const menuItems: MenuItem[] = [
 				path: '/components/popover',
 			},
 			{
+				title: 'Sidebar',
+				path: '/components/sidebar',
+			},
+			{
 				title: 'Toast',
 				path: '/components/toast',
 			},

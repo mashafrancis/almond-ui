@@ -11,6 +11,12 @@ import { cva } from 'class-variance-authority';
 
 // Copied from: https://github.com/shadcn/ui/blob/0a241be17ffe07cf21cc72702feb1aea852ef571/apps/www/components/toc.tsx
 
+// Copied from: https://github.com/shadcn/ui/blob/0a241be17ffe07cf21cc72702feb1aea852ef571/apps/www/components/toc.tsx
+
+// Copied from: https://github.com/shadcn/ui/blob/0a241be17ffe07cf21cc72702feb1aea852ef571/apps/www/components/toc.tsx
+
+// Copied from: https://github.com/shadcn/ui/blob/0a241be17ffe07cf21cc72702feb1aea852ef571/apps/www/components/toc.tsx
+
 interface TocProps {
 	toc: TableOfContents;
 }

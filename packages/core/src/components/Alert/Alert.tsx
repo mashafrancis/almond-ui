@@ -1,14 +1,14 @@
 'use client';
 
 import * as React from 'react';
-import { Ref, forwardRef, useMemo, useState } from 'react';
+import { Ref, forwardRef, useMemo, useRef, useState } from 'react';
 
 import {
 	AlertComponent,
 	AlertIconType,
 	AlertProps,
 } from '@components/Alert/Alert.types';
-import { Fader } from '@components/Fader';
+import { useMergeRefs } from '@floating-ui/react';
 import { ErrorIcon } from '@icons/Error';
 import { InfoIcon } from '@icons/Info';
 import { QuestionIcon } from '@icons/Question';
@@ -19,6 +19,8 @@ import { useComponentTheme } from '@theme/theme.context';
 import { useComponentVariant } from '@theme/variant.context';
 import { usePropId } from '@utils/usePropId';
 import { twMerge } from 'tailwind-merge';
+
+import { useFade } from '../../animations';
 
 const defaultProps: Partial<AlertProps> = {
 	accent: 'none',
@@ -70,6 +72,10 @@ const Alert: AlertComponent = forwardRef(
 			...props,
 		};
 		const [visible, setVisible] = useState(true);
+		const localRef = useRef<HTMLDivElement>(null);
+		const mergedRef = useMergeRefs([ref || null, localRef]);
+
+		useFade({ ref: localRef, visible, enabled: dismissableAnimation });
 
 		const classes = useMemo(() => {
 			return twMerge(
@@ -98,11 +104,11 @@ const Alert: AlertComponent = forwardRef(
 
 		const id = usePropId(props.id);
 
-		const items = (
+		return (
 			<div
 				id={id}
 				role='alert'
-				ref={ref}
+				ref={mergedRef}
 				className={classes}
 				{...additionalProps}
 			>
@@ -119,6 +125,9 @@ const Alert: AlertComponent = forwardRef(
 				</div>
 				{dismissable && (
 					<button
+						type='button'
+						aria-label='Close alert'
+						role='button'
 						title='Close alert'
 						className={theme.iconWrapper()}
 						onClick={() => setVisible(false)}
@@ -127,17 +136,6 @@ const Alert: AlertComponent = forwardRef(
 					</button>
 				)}
 			</div>
-		);
-
-		return (
-			<Fader
-				ref={ref}
-				isActive={dismissableAnimation}
-				isShown={visible}
-				method='unmount'
-			>
-				{items}
-			</Fader>
 		);
 	}
 );

@@ -34,6 +34,10 @@ import {
 	SelectorShowcaseProps,
 } from '@/ui/configurators/components/Selector.showcase';
 import {
+	SidebarShowcase,
+	SidebarShowcaseProps,
+} from '@/ui/configurators/components/Sidebar.showcase';
+import {
 	TableShowcase,
 	TableShowcaseProps,
 } from '@/ui/configurators/components/Table.showcase';
@@ -244,6 +248,9 @@ const components = {
 	),
 	ComboboxShowcase: ({ showcase }: ComboboxShowcaseProps) => (
 		<ComboboxShowcase showcase={showcase} />
+	),
+	SidebarShowcase: ({ showcase }: SidebarShowcaseProps) => (
+		<SidebarShowcase showcase={showcase} />
 	),
 	View: ({ ...props }) => <View {...props} />,
 	MagnifyingGlass: ({ ...props }) => <MagnifyingGlass {...props} />,
